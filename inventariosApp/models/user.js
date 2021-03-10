@@ -1,6 +1,6 @@
 const login = (email,passwd,callback)=>{
-    var err ='';
-    var bd_data=''; //simula la info de bd
+    var err;
+    var bd_data; //simula la info de bd
 
     if ( email == 'joe@doe.com' && passwd == '1234') {
         //consulta bd info faltante
