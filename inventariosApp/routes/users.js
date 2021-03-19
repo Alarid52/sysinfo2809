@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var usuario = require('../models/user');
+var jwt = require('jsonwebtoken');
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
@@ -9,14 +10,20 @@ router.get('/', function(req, res, next) {
 
 //Proceso de autenticación pero sin elementos de SEGURIDAD
 router.post('/login', (req,res,next) => {
-  //console.log(req.body.email , req.body.passwd);
   usuario.login(req.body.email,req.body.passwd,( e, d )=>{ //passwd SHA256 (algoritmo HASH de resumen)
     if (d) {
-      //res.send('Login correcto');
       ses = req.session;
       console.log(ses.id);
       ses.userdata = d;
       console.log(ses);
+      //payload*****************************
+      const payload = {
+        datos : d
+      };
+      const clave = 'dios1234'; // Obtener desde ENV
+      const token = jw.sign(payload,clave,{expiresIn:60*5});
+      ses.token = token;
+      //************************************
       res.redirect('/');
     } else {
       res.json(e);
