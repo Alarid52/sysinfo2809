@@ -1,10 +1,10 @@
-const login = (email,passwd,callback)=>{
+const login = (email, passwd, callback) => {
     var err;
     var bd_data; //simula la info de bd
 
-    if ( email == 'joe@doe.com' && passwd == '1234') {
+    if (email == 'joe@doe.com' && passwd == '1234') {
         //consulta bd info faltante
-        bd_data={
+        bd_data = {
             'email': email,
             'depto': 'Ventas',
             'phone': '5511447788'
@@ -14,7 +14,7 @@ const login = (email,passwd,callback)=>{
             'mensaje': "Credenciales incorrectas"
         }
     }
-    callback(err,bd_data);
+    callback(err, bd_data);
 }
 
 exports.login = login;
